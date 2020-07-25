@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Domain.Entity
 {
-    public class Hero
+    public class HeroEntity
     {
-        long Id { get; set; }
-        string Name { get; set; }
+        public long Id { get; set; }
+        public string Name { get; set; }
     }
 }
