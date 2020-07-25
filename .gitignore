@@ -1,3 +1,13 @@
 .vs/*
+
 SchoolAPI/bin/*
 SchoolAPI/obj/*
+
+Infrastructure/bin/*
+Infrastructure/obj/*
+
+Domain/bin/*
+Domain/obj/*
+
+UnitTest/bin/*
+UnitTest/obj/*
