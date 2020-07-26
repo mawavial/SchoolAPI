@@ -2,6 +2,8 @@
 
 SchoolAPI/bin/*
 SchoolAPI/obj/*
+SchoolAPI/appsettings.json
+SchoolAPI/appsettings.Development.json
 
 Infrastructure/bin/*
 Infrastructure/obj/*
@@ -11,3 +13,5 @@ Domain/obj/*
 
 UnitTest/bin/*
 UnitTest/obj/*
+
+

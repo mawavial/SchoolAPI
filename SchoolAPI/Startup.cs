@@ -1,22 +1,18 @@
-using System;
-using System.Reflection;
-using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Domain.Interface.IBusiness;
 using Domain.Business;
+using Microsoft.EntityFrameworkCore;
+using Infrastructure;
 
 namespace SchoolAPI
 {
     public class Startup
     {
+        readonly string schoolAPI = "SchoolAPI";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -27,6 +23,20 @@ namespace SchoolAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var connection = Configuration["MySql:MySqlConnectionString"];
+            services.AddDbContext<Context>(options =>
+                options.UseMySql(connection));
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: schoolAPI,
+                                  builder =>
+                                  {
+                                      builder
+                                      .WithOrigins("http://localhost:4200", "https://localhost:4200");
+                                  });
+            });
+
             services.AddMvc();
             //services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("TodoList"));
             services.AddControllers();
@@ -54,6 +64,7 @@ namespace SchoolAPI
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger(c =>
             {
+                
                 c.SerializeAsV2 = true;
             });
 
@@ -66,12 +77,14 @@ namespace SchoolAPI
             });
 
             app.UseRouting();
+
+            //must be after UserRouting and before UseAuthorization and also before UseEndpoint
+            app.UseCors(schoolAPI);
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
-
-
         }
     }
 }

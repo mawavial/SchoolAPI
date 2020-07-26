@@ -1,4 +1,5 @@
 ﻿using Domain.Interface.IBusiness;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
@@ -16,7 +17,6 @@ namespace SchoolAPI.Controllers
             this.heroBusiness = heroBusiness;
         }
 
-
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -29,7 +29,6 @@ namespace SchoolAPI.Controllers
                 return BadRequest("Não foi possível retornar a chamada");
                 throw;
             }
-            
         }
     }
 }
