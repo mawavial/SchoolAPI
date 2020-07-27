@@ -45,6 +45,11 @@ namespace Domain.Business
             studentData.DeleteById(studentData.GetByName(name).Id);
         }
 
+        public void Update(StudentEntity student)
+        {
+            studentData.Update(student);
+        }
+
 
     }
 }

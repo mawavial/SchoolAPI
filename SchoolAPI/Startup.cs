@@ -58,11 +58,13 @@ namespace SchoolAPI
             services.AddSingleton<IHeroBusiness, HeroBusiness>();
             services.AddSingleton<IStudentBusiness, StudentBusiness>();
             services.AddSingleton<ISchoolBusiness, SchoolBusiness>();
+            services.AddSingleton<IClassBusiness, ClassBusiness>();
 
             //Data
             services.AddSingleton<IHeroData, HeroData>();
             services.AddSingleton<ISchoolData, SchoolData>();
             services.AddSingleton<IStudentData, StudentData>();
+            services.AddSingleton<IClassData, ClassData>();
 
         }
 

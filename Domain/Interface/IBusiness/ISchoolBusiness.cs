@@ -14,6 +14,7 @@ namespace Domain.Interface.IBusiness
         SchoolEntity GetByName(string name);
         void DeleteById(long id);
         void DeleteByName(string name);
+        public void Update(SchoolEntity school);
 
     }
 }

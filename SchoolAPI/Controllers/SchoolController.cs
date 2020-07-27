@@ -19,6 +19,7 @@ namespace SchoolAPI.Controllers
             this.schoolBusiness = schoolBusiness;
         }
 
+        [Route("GetAll")]
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -34,7 +35,7 @@ namespace SchoolAPI.Controllers
             
         }
 
-        [ActionName("GetById")]
+        [Route("GetById")]
         [HttpGet]
         public IActionResult GetById(long id)
         {
@@ -48,7 +49,7 @@ namespace SchoolAPI.Controllers
                 throw;
             }
         }
-        [ActionName("GetByName")]
+        [Route("GetByName")]
         [HttpGet]
         public IActionResult GetByName(string name)
         {
@@ -64,8 +65,9 @@ namespace SchoolAPI.Controllers
 
         }
 
+        [Route("Add")]
         [HttpPost]
-        public IActionResult Add(SchoolEntity school)
+        public IActionResult Add([FromBody] SchoolEntity school)
         {
             try
             {
@@ -79,8 +81,9 @@ namespace SchoolAPI.Controllers
             }
         }
 
-        [HttpDelete]
-        public IActionResult Delete(long id)
+        [Route("DeleteById")]
+        [HttpPost]
+        public IActionResult Delete([FromBody] long id)
         {
             ;
             try
@@ -95,8 +98,9 @@ namespace SchoolAPI.Controllers
             }
         }
 
-        [HttpDelete]
-        public IActionResult DeleteByName(string name)
+        [Route("DeleteByName")]
+        [HttpPost]
+        public IActionResult DeleteByName([FromBody] string name)
         {
             try
             {
@@ -109,7 +113,22 @@ namespace SchoolAPI.Controllers
                 throw;
             }
         }
-        
+        [Route("Update")]
+        [HttpPut]
+        public IActionResult Update(SchoolEntity school)
+        {
+            try
+            {
+                schoolBusiness.Update(school);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest("Não foi possível completar a requisição");
+                throw;
+            }
+        }
+
 
     }
 }

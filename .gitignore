@@ -4,6 +4,8 @@ SchoolAPI/bin/*
 SchoolAPI/obj/*
 SchoolAPI/appsettings.json
 SchoolAPI/appsettings.Development.json
+SchoolAPI/schooldb.db
+
 
 Infrastructure/bin/*
 Infrastructure/obj/*

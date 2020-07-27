@@ -37,6 +37,12 @@ namespace Infrastructure.Data
             context.Students.Remove(GetById(id));
         }
 
+        public void Update(StudentEntity student)
+        {
+            context.Update<StudentEntity>(student);
+            context.SaveChanges();
+        }
+
 
     }
 }

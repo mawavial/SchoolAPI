@@ -40,6 +40,11 @@ namespace Domain.Business
         {
             schoolData.DeleteById(schoolData.GetByName(name).Id);
         }
-        
+
+        public void Update(SchoolEntity school)
+        {
+            schoolData.Update(school);
+        }
+
     }
 }

@@ -5,13 +5,15 @@ namespace Domain.Interface.IBusiness
 {
     public interface IStudentBusiness
     {
-        public void Add(StudentEntity student);
-        public List<StudentEntity> GetAll();
-        public StudentEntity GetById(long id);
-        public StudentEntity GetByName(string name);
-        public void DeleteById(long id);
-        public void DeleteByName(string name);
+        void Add(StudentEntity student);
+        List<StudentEntity> GetAll();
+        StudentEntity GetById(long id);
+        StudentEntity GetByName(string name);
+        void DeleteById(long id);
+        void DeleteByName(string name);
+        public void Update(StudentEntity student);
+
     }
 
- 
+
 }

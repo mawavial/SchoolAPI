@@ -14,5 +14,6 @@ namespace Infrastructure
         public DbSet<HeroEntity> Heroes { get; set; }
         public DbSet<StudentEntity> Students { get; set; }
         public DbSet<SchoolEntity> Schools { get; set; }
+        public DbSet<ClassEntity> Classes { get; set; }
     }
 }

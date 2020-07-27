@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Dynamic;
 
 namespace Domain.Entity
 {
@@ -11,6 +13,7 @@ namespace Domain.Entity
         public string Name { get; set; }
         public int Students { get; set; }
         public decimal Grade { get; set; }
+        public int Classes { get; set; }
 
     }
 }

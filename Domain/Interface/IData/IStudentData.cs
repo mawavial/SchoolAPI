@@ -10,6 +10,7 @@ namespace Domain.Interface.IData
         StudentEntity GetById(long id);
         StudentEntity GetByName(string name);
         void DeleteById(long id);
+        void Update(StudentEntity student);
 
     }
 }

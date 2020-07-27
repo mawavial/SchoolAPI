@@ -12,5 +12,7 @@ namespace Domain.Interface.IData
         SchoolEntity GetById(long id);
         SchoolEntity GetByName(string name);
         void DeleteById(long id);
+
+        public void Update(SchoolEntity school);
     }
 }

@@ -2,21 +2,37 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Domain.Business;
 using Domain.Entity;
 using Domain.Interface.IBusiness;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SchoolAPI.Controllers
 {
-    [Produces("application/json")]
-    [Route("api/[controller]")]
-    [ApiController]
-    public class StudentController : Controller
+    
+    public class ClassController : Controller
     {
-        private readonly IStudentBusiness studentBusiness;
-        public StudentController(IStudentBusiness studentBusiness)
+        private readonly IClassBusiness classBusiness;
+        public ClassController(IClassBusiness classBusiness)
         {
-            this.studentBusiness = studentBusiness;
+            this.classBusiness = classBusiness;
+        }
+
+        [Route("Add")]
+        [HttpPost]
+        public IActionResult Add([FromBody] ClassEntity classE)
+        {
+            
+            try
+            {
+                classBusiness.Add(classE);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest("Não foi possível completar a requisição");
+                throw;
+            }
         }
 
         [Route("GetAll")]
@@ -25,13 +41,14 @@ namespace SchoolAPI.Controllers
         {
             try
             {
-                return Ok(studentBusiness.GetAll());
+                return Ok(classBusiness.GetAll());
             }
             catch (Exception)
             {
                 return BadRequest("Não foi possível completar a requisição");
                 throw;
             }
+            
 
         }
 
@@ -41,39 +58,40 @@ namespace SchoolAPI.Controllers
         {
             try
             {
-                return Ok(studentBusiness.GetById(id));
+                return Ok(classBusiness.GetById(id));
             }
             catch (Exception)
             {
                 return BadRequest("Não foi possível completar a requisição");
                 throw;
             }
+            
         }
 
         [Route("GetByName")]
         [HttpGet]
         public IActionResult GetByName(string name)
         {
+            
             try
             {
-                return Ok(studentBusiness.GetByName(name));
+                return Ok(classBusiness.GetByName(name));
             }
             catch (Exception)
             {
                 return BadRequest("Não foi possível completar a requisição");
                 throw;
             }
-
         }
 
-        [Route("Add")]
-        [HttpPost]
-        public IActionResult Add([FromBody] StudentEntity school)
+        [Route("GetByYear")]
+        [HttpGet]
+        public IActionResult GetByYear(int year)
         {
+            
             try
             {
-                studentBusiness.Add(school);
-                return Ok();
+                return Ok(classBusiness.GetByYear(year));
             }
             catch (Exception)
             {
@@ -84,28 +102,12 @@ namespace SchoolAPI.Controllers
 
         [Route("DeleteById")]
         [HttpPost]
-        public IActionResult Delete([FromBody] long id)
+        public IActionResult DeleteById([FromBody] long id)
         {
-            ;
+            
             try
             {
-                studentBusiness.DeleteById(id);
-                return Ok();
-            }
-            catch (Exception)
-            {
-                return BadRequest("Não foi possível completar a requisição");
-                throw;
-            }
-        }
-
-        [Route("DeleteByName")]
-        [HttpPost]
-        public IActionResult DeleteByName([FromBody] string name)
-        {
-            try
-            {
-                studentBusiness.DeleteByName(name);
+                classBusiness.DeleteById(id);
                 return Ok();
             }
             catch (Exception)
@@ -117,9 +119,21 @@ namespace SchoolAPI.Controllers
 
         [Route("Update")]
         [HttpPut]
-        public void Update(StudentEntity student)
+        public IActionResult Update(ClassEntity classE)
         {
-            studentBusiness.Update(student);
+            try
+            {
+                classBusiness.Update(classE);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+                throw;
+            }
+            
         }
+
+
     }
 }
