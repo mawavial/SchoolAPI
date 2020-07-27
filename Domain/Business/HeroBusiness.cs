@@ -1,23 +1,27 @@
 ﻿using Domain.Entity;
 using Domain.Interface.IBusiness;
+using Domain.Interface.IData;
 using System.Collections.Generic;
 
 namespace Domain.Business
 {
-
     public class HeroBusiness : IHeroBusiness
     {
-        public HeroBusiness()
+        private readonly IHeroData heroData;
+        public HeroBusiness(IHeroData heroData)
         {
-
+            this.heroData = heroData;
         }
 
         public List<HeroEntity> GetAll()
         {
-            var list = mockHeroes();
-            return list;
+            return heroData.GetAll();
         }
 
+        public void Add(HeroEntity hero)
+        {
+            heroData.Add(hero);
+        }
 
         #region mockme
         private List<HeroEntity> mockHeroes()

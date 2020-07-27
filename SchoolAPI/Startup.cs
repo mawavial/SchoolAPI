@@ -7,6 +7,8 @@ using Domain.Interface.IBusiness;
 using Domain.Business;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure;
+using Domain.Interface.IData;
+using Infrastructure.Data;
 
 namespace SchoolAPI
 {
@@ -23,9 +25,10 @@ namespace SchoolAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connection = Configuration["MySql:MySqlConnectionString"];
-            services.AddDbContext<Context>(options =>
-                options.UseMySql(connection));
+            
+            services.AddDbContext<SchoolContext>(options =>
+                options.UseSqlite("Data Source = schooldb.db")
+                ,ServiceLifetime.Singleton);
 
             services.AddCors(options =>
             {
@@ -53,8 +56,14 @@ namespace SchoolAPI
 
             //Business 
             services.AddSingleton<IHeroBusiness, HeroBusiness>();
+            services.AddSingleton<IStudentBusiness, StudentBusiness>();
+            services.AddSingleton<ISchoolBusiness, SchoolBusiness>();
 
             //Data
+            services.AddSingleton<IHeroData, HeroData>();
+            services.AddSingleton<ISchoolData, SchoolData>();
+            services.AddSingleton<IStudentData, StudentData>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

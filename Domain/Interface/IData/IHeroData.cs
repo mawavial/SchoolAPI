@@ -3,11 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Domain.Interface.IBusiness
+namespace Domain.Interface.IData
 {
-    public interface IHeroBusiness
+    public interface IHeroData
     {
-        List<HeroEntity> GetAll();
         void Add(HeroEntity hero);
+        List<HeroEntity> GetAll();
+        HeroEntity GetById(long Id);
     }
 }

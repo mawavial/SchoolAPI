@@ -1,4 +1,5 @@
-﻿using Domain.Interface.IBusiness;
+﻿using Domain.Entity;
+using Domain.Interface.IBusiness;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -24,9 +25,24 @@ namespace SchoolAPI.Controllers
             {
                 return Ok(heroBusiness.GetAll());
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return BadRequest("Não foi possível retornar a chamada");
+                throw;
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Add(HeroEntity hero)
+        {
+            try
+            {
+                heroBusiness.Add(hero);
+                return Ok("Herói adicionado com sucesso!");
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Não foi possível salvar o seu herói");
                 throw;
             }
         }
